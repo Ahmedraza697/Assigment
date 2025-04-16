@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Marketing Expense Tracker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input, select, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 1em;
+      transition: border 0.3s;
+    }
+    input:focus, select:focus {
+      border-color: #764ba2;
+      outline: none;
+    }
+    button {
+      background-color: #764ba2;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #5e3c91;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    li {
+      background: #f9f9f9;
+      margin-bottom: 12px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .campaign {
+      font-size: 0.85em;
+      background: #764ba2;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+      margin-top: 25px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📊 Marketing Expense Tracker</h2>
+    <input type="text" id="description" placeholder="Enter description..." />
+    <input type="number" id="amount" placeholder="Enter amount ($)" />
+    <select id="campaign">
+      <option value="Grocery">Grocery</option>
+      <option value="Rent">Rent</option>
+      <option value="Bills">Bills</option>
+      <option value="Our Expence">Our Expence</option>
+    </select>
+    <button onclick="addExpense()">➕ Add Expense</button>
+
+    <div class="total" id="total">Total: $0</div>
+    <ul id="expenseList"></ul>
+  </div>
+
+  <script>
+    let expenses = [];
+
+    function addExpense() {
+      const description = document.getElementById('description').value.trim();
+      const amount = parseFloat(document.getElementById('amount').value);
+      const campaign = document.getElementById('campaign').value;
+
+      if (!description || isNaN(amount) || amount <= 0) {
+        alert("Please enter valid details.");
+        return;
+      }
+
+      const expense = {
+        description,
+        amount,
+        campaign
+      };
+
+      expenses.push(expense);
+      updateUI();
+      clearForm();
+    }
+
+    function updateUI() {
+      const list = document.getElementById('expenseList');
+      list.innerHTML = '';
+
+      let total = 0;
+
+      expenses.forEach(exp => {
+        total += exp.amount;
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${exp.description} - $${exp.amount.toFixed(2)}</span>
+          <span class="campaign">${exp.campaign}</span>
+        `;
+        list.appendChild(li);
+      });
+
+      document.getElementById('total').textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    function clearForm() {
+      document.getElementById('description').value = '';
+      document.getElementById('amount').value = '';
+    }
+  </script>
+</body>
+</html>
