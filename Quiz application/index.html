@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated Quiz App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container" id="mainDiv">
+    <h1>Quiz Application SMIT</h1>
+    <div id="timer"></div>
+    <div id="startScreen">
+      <center><button onclick="startQuiz()">Start Quiz</button></center>
+    </div>
+    <div id="quizScreen" style="display:none;">
+      <p id="ques"></p>
+      <div>
+        <input onclick="btnWork()" type="radio" name="quiz" id="option1" />
+        <label id="opt1" for="option1"></label>
+      </div>
+      <div>
+        <input onclick="btnWork()" type="radio" name="quiz" id="option2" />
+        <label id="opt2" for="option2"></label>
+      </div>
+      <div>
+        <input onclick="btnWork()" type="radio" name="quiz" id="option3" />
+        <label id="opt3" for="option3"></label>
+      </div>
+      <br />
+      <button id="btn" disabled>Next Question</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="app.js"></script>
+</body>
+</html>
